@@ -30,7 +30,7 @@ RUNLEVEL=1 apt-get install -y libcairo2-dev libffi-dev pkg-config python-dev pyt
 
 # Download source repositories for Graphite/Carbon/Whisper and Statsite
 cd /usr/local/src
-git clone https://github.com/graphite-project/graphite-web.git
+git clone https://github.com/deniszh/graphite-web.git
 git clone https://github.com/graphite-project/carbon.git
 git clone https://github.com/graphite-project/whisper.git
 git clone https://github.com/armon/statsite.git
