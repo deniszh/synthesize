@@ -28,4 +28,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       graphite_version = ENV['GRAPHITE_RELEASE'].nil? ? 'master' : ENV['GRAPHITE_RELEASE']
       graph002.vm.provision "shell", inline: "cd /vagrant; GRAPHITE_RELEASE=#{graphite_version} ./install"
    end
+
+	config.vm.define "master" do |master|
+      master.vm.box = "mayflower/trusty64-puppet3"
+      master.vm.network :forwarded_port, guest: 443, host: 10443
+      master.vm.network :forwarded_port, guest: 8125, host: 10125, protocol: 'tcp'
+      master.vm.network :forwarded_port, guest: 8125, host: 10125, protocol: 'udp'
+      master.vm.network :forwarded_port, guest: 2003, host: 42003
+      master.vm.network :forwarded_port, guest: 2004, host: 42004
+      master.vm.network :forwarded_port, guest: 3000, host: 5030
+      graphite_version = ENV['GRAPHITE_RELEASE'].nil? ? 'master' : ENV['GRAPHITE_RELEASE']
+      master.vm.provision "shell", inline: "cd /vagrant; GRAPHITE_RELEASE=#{graphite_version} ./install"
+   end
 end
