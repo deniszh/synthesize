@@ -7,7 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.define "graph001" do |graph001|
       graph001.vm.box = "mayflower/trusty64-puppet3"
-	  graph001.vm.network "private_network", ip: "192.168.50.1"
+	  graph001.vm.network "private_network", ip: "192.168.50.2"
       graph001.vm.network :forwarded_port, guest: 443, host: 8443
 	  graph001.vm.network :forwarded_port, guest: 8125, host: 8125, protocol: 'tcp'
 	  graph001.vm.network :forwarded_port, guest: 8125, host: 8125, protocol: 'udp'
@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 	config.vm.define "graph002" do |graph002|
       graph002.vm.box = "mayflower/trusty64-puppet3"
-	  graph002.vm.network "private_network", ip: "192.168.50.2"
+	  graph002.vm.network "private_network", ip: "192.168.50.3"
       graph002.vm.network :forwarded_port, guest: 443, host: 9443
       graph002.vm.network :forwarded_port, guest: 8125, host: 9125, protocol: 'tcp'
       graph002.vm.network :forwarded_port, guest: 8125, host: 9125, protocol: 'udp'
@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 	config.vm.define "master" do |master|
       master.vm.box = "mayflower/trusty64-puppet3"
-      master.vm.network "private_network", ip: "192.168.50.3"
+      master.vm.network "private_network", ip: "192.168.50.4"
       master.vm.network :forwarded_port, guest: 443, host: 10443
       master.vm.network :forwarded_port, guest: 8125, host: 10125, protocol: 'tcp'
       master.vm.network :forwarded_port, guest: 8125, host: 10125, protocol: 'udp'
