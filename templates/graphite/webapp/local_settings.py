@@ -216,10 +216,12 @@ MEMCACHE_HOSTS = ['127.0.0.1:11211']
 # remote server in the cluster. These servers must each have local access to
 # metric data. Note that the first server to return a match for a query will be
 # used.
-#CLUSTER_SERVERS = ["10.0.2.2:80", "10.0.2.3:80"]
+#CLUSTER_SERVERS = ["192.168.50.2", "192.168.50.3"]
 
 # This settings control wether https is used to communicate between cluster members
-#INTRACLUSTER_HTTPS = False
+INTRACLUSTER_HTTPS = True
+REMOTE_STORE_MERGE_RESULTS = False
+
 ## These are timeout values (in seconds) for requests to remote webapps
 #REMOTE_FIND_TIMEOUT = 3.0             # Timeout for metric find requests
 #REMOTE_FETCH_TIMEOUT = 6.0            # Timeout to fetch series data
