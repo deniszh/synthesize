@@ -43,7 +43,7 @@ if [[ ! $PYTHON_OPENSSL_INSTALLED == '' ]]; then
 fi
 
 if [ -z $GRAPHITE_RELEASE ]; then
-    GRAPHITE_RELEASE='0.9.15'
+    GRAPHITE_RELEASE='1.0.0'
 fi
 
 if [[ ! $UBUNTU_RELEASE =~ 'Ubuntu 14.04' ]]; then
@@ -100,7 +100,7 @@ cp ${SYNTHESIZE_HOME}/templates/graphite/webapp/* .
 sed -i -e "s/UNSAFE_DEFAULT/`date | md5sum | cut -d ' ' -f 1`/" local_settings.py
 
 # Setup the Django database
-python manage.py syncdb --noinput
+PYTHONPATH=${GRAPHITE_HOME}/webapp django-admin.py migrate --settings=graphite.settings --run-syncdb
 chown www-data:www-data ${GRAPHITE_STORAGE}/graphite.db
 
 # Add carbon system user and set permissions
@@ -110,7 +110,7 @@ chmod 775 ${GRAPHITE_STORAGE}
 chown www-data:carbon ${GRAPHITE_STORAGE}
 chown -R carbon ${GRAPHITE_STORAGE}/whisper
 mkdir ${GRAPHITE_STORAGE}/log/apache2
-chown www-data ${GRAPHITE_STORAGE}/log/webapp
+chown -R www-data ${GRAPHITE_STORAGE}/log/webapp
 chmod +x /etc/init.d/carbon-cache
 
 # Setup hourly cron to rebuild Graphite index
